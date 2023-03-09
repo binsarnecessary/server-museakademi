@@ -38,6 +38,13 @@ class UsersRepository {
 
     return getPosts;
   }
+
+  // static async getAll() {
+  //   const getAllUser = await User.findAll({
+  //   });
+
+  //   return getAllUser;
+  // }
 }
 
 module.exports = UsersRepository;
