@@ -102,9 +102,10 @@ const getAllCourse = async (req, res, next) => {
 const deleteCourseById = async (req, res, next) => {
   const { id } = req.params;
 
-  const { status, status_code, message, data } = await coursesService.deleteCourseById({
-    id,
-  });
+  const { status, status_code, message, data } =
+    await coursesService.deleteCourseById({
+      id,
+    });
 
   res.status(status_code).send({
     status: status,
@@ -113,24 +114,27 @@ const deleteCourseById = async (req, res, next) => {
   });
 };
 
-// const updateCourseByID = async (req, res, next) => {
+const updateCourse = async (req, res) => {
+  try {
+    await course.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.status(200).send({
+      status: true,
+      message: "Updated Succes",
+      data: {
+        course: course,
+      },
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
-//     const { id } = req.params;
-
-//     const { title, description } = req.body;
-
-//     const { status, status_code, message, data } = await coursesService.updateCourseByID({
-//         id,
-//         title,
-//         description,
-//     });
-
-//     res.status (status_code).send({
-//         status:status,
-//         message: message,
-//         data: data,
-//     })
-
-// };
-
-module.exports = { getCourseByID, createCourse, getAllCourse, deleteCourseById};
+module.exports = {
+  getCourseByID,
+  createCourse,
+  getAllCourse,
+  deleteCourseById,
+  updateCourse,
+};

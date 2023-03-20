@@ -1,4 +1,5 @@
 const livestreamingsService = require("../services/livestreamingServices");
+const { Livestreaming } = require("../models");
 
 const getLiveByID = async (req, res) => {
   const { id } = req.params;
@@ -46,25 +47,49 @@ const createLive = async (req, res) => {
       youtubeUrl,
     });
 
-    res.status(status_code).send({
-        status: status,
-        message: message,
-        data: data,
-    })
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  });
 };
 
 const deleteLive = async (req, res) => {
-    const {id} = req.params;
+  const { id } = req.params;
 
-    const {status, status_code, message, data} = await livestreamingsService.deleteLive({
-        id
+  const { status, status_code, message, data } =
+    await livestreamingsService.deleteLive({
+      id,
     });
 
-    res.status(status_code).send({
-        status: status,
-        message: message,
-        data: data,
-    })
-}
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  });
+};
 
-module.exports = { getLiveByID, getAllLive, createLive, deleteLive };
+const updateLivestreaming = async (req, res) => {
+  try {
+    await Livestreaming.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.status(200).send({
+      status: true,
+      message: "Updated Succes",
+      data: {
+        Livestreaming: Livestreaming,
+      },
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+module.exports = {
+  getLiveByID,
+  getAllLive,
+  createLive,
+  deleteLive,
+  updateLivestreaming,
+};

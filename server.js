@@ -47,12 +47,14 @@ app.get("/api/course/:id", courseController.getCourseByID)
 app.get("/api/course", courseController.getAllCourse);
 app.post("/api/course",upload.single("coursePhoto"), courseController.createCourse)
 app.delete("/api/course/:id", courseController.deleteCourseById)
+app.patch("/api/course/:id",upload.none(), courseController.updateCourse);
 
 //Livestreaming
 app.get("/api/livestreaming/:id", livestreamingController.getLiveByID)
 app.get("/api/livestreaming", livestreamingController.getAllLive)
 app.post("/api/livestreaming",upload.single("thumbnailLivestreaming"), livestreamingController.createLive)
 app.delete("/api/livestreaming/:id", livestreamingController.deleteLive)
+app.patch("/api/livestreaming/:id",upload.none(), livestreamingController.updateLivestreaming);
 
 
 // API Documentation
