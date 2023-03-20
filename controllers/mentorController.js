@@ -54,17 +54,17 @@ const updateByID = async (req, res, next) => {
   };
 
   const create = async (req, res, next) => {
-    const { mentor_id, name, skill, nomorKTP, scanKTP, fileCV, linkVideo, filePhoto, aboutMe } = req.body;
+    const { mentor_id, name, skill, nomorKTP, linkVideo,  aboutMe } = req.body;
   
     const { status, status_code, message, data } = await mentorsService.create({
         mentor_id,
         name,
         skill,
         nomorKTP,
-        scanKTP,
-        fileCV,
+        scanKTP: req.file,
+        fileCV: req.file,
         linkVideo,
-        filePhoto,
+        filePhoto: req.file,
         aboutMe,
     });
   

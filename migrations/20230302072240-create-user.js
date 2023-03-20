@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      user_id: {
+        autoIncrement: true,
+        type: Sequelize.INTEGER
+      },
       role: {
         type: Sequelize.STRING
       },

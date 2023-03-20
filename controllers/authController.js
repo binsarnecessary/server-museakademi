@@ -8,7 +8,7 @@ const register = async (req, res) => {
     email,
     password,
     role,
-    profile_picture: req.uploaded_picture,
+    profile_picture: req.file,
     address,
     phone,
   });

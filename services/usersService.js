@@ -64,30 +64,6 @@ class UsersService {
       };
     }
   }
-
-  // static async getAll ({}) {
-  //   try {
-  //     const getAllUser = await usersRepository.getAll;
-
-  //     return {
-  //       status: true,
-  //       status_code: 200,
-  //       message: "Success",
-  //       data: {
-  //         posts: getAllUser,
-  //       },
-  //     };
-  //   } catch (err) {
-  //     return {
-  //       status: false,
-  //       status_code: 500,
-  //       message: err.message,
-  //       data: {
-  //         registered_user: null,
-  //       },
-  //     };
-  //   }
-  // }
 }
 
 module.exports = UsersService;

@@ -26,20 +26,32 @@ app.post("/auth/register", upload.single("profile_picture"), authController.regi
 app.post("/auth/login", authController.login);
 app.get("/auth/me", middleware.authenticate, authController.currentUser);
 
+//User
+app.delete("/api/users/:id", usersController.deleteByID)
+// app.get("/api/users", middleware.authenticate, middleware.isAdmin, usersController.getAllUsers);
+app.get("/api/users", usersController.getAllUsers);
+app.get("/api/users", usersController.getAllUsers);
+app.patch("/api/users/:id",upload.none(), usersController.updateUser)
+  
+
 // app.post("/auth/login-google", authController.loginGoogle);
 
 //Mentor
-app.post("/api/mentor", mentorController.create);
+app.post("/api/mentor", upload.fields([
+  { name: "scanKTP", maxCount: 1 },
+  { name: "fileCV", maxCount: 1 },
+  { name: "filePhoto", maxCount: 1 }
+]), mentorController.create);
 app.put("/api/mentor/:id", mentorController.updateByID);
 app.get("/api/mentor/:id", mentorController.getMentorByID);
 app.get("/api/mentor", mentorController.getAll)
 
 //Course
 app.get("/api/course/:id", courseController.getCourseByID)
+app.get("/api/course", courseController.getAllCourse);
+app.post("/api/course",upload.single("coursePhoto"), courseController.createCourse)
+app.delete("/api/course/:id", courseController.deleteCourseById)
 
-//Admin
-
-app.get("/api/users", usersController.getAllUsers);
 
 app.delete(
   "/users/:id",

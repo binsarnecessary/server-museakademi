@@ -10,6 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       mentor_id: {
+        autoIncrement: true,
         type: Sequelize.INTEGER
       },
       name: {

@@ -1,5 +1,6 @@
 const usersService = require("../services/usersService");
 const { User } = require("../models");
+const user = require("../models/user");
 
 const getPostsByID = async (req, res, next) => {
   const { id } = req.params;
@@ -30,15 +31,38 @@ const deleteByID = async (req, res, next) => {
   });
 };
 
-const getAllUsers =  (req, res) => {
-  User
-    .findAll()
+const getAllUsers = (req, res) => {
+  User.findAll()
     .then((user) => {
-      res.status(200).json(user);
+      res.status(200).send({
+        status: true,
+        message: "success",
+        data: {
+          user: user,
+        },
+      });
     })
     .catch((err) => {
       res.status(500).json({ message: "Terjadi kesalahan pada server!" });
     });
 };
 
-module.exports = { getPostsByID, deleteByID, getAllUsers };
+
+const updateUser = async (req, res) => {
+  try {
+    await User.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.status(200).send({
+      status: true,
+      message: 'Updated Succes',
+      data: {
+        user: user
+      }
+    })
+  } catch (err) {
+    console.log(err.message)
+  }
+};
+
+module.exports = { getPostsByID, deleteByID, getAllUsers, updateUser };

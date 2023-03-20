@@ -1,7 +1,7 @@
 const mentorRepository = require("../repositories/mentorRepository");
+const Cloudinary = require("../utils/cloudinary");
 
 class MentorServices {
-  
   static async getMentorByID({ id }) {
     try {
       const getMentor = await mentorRepository.getMentorByID({
@@ -28,7 +28,7 @@ class MentorServices {
     }
   }
 
-  static async getAll ({}) {
+  static async getAll({}) {
     try {
       const getAllMentor = await mentorRepository.getAll;
 
@@ -51,21 +51,19 @@ class MentorServices {
       };
     }
   }
-  
-  static async create ({mentor_id, name, skill, nomorKTP, scanKTP, fileCV, linkVideo, filePhoto, aboutMe}){
-    try {
-      
-      if (!mentor_id) {
-        return {
-          status: false,
-          status_code: 400,
-          message: "mentor_id wajib diisi",
-          data: {
-            registered_mentor: null,
-          },
-        };
-      }
 
+  static async create({
+    mentor_id,
+    name,
+    skill,
+    nomorKTP,
+    scanKTP: fileScan,
+    fileCV : newFileCV,
+    linkVideo,
+    filePhoto :newFilePhoto,
+    aboutMe,
+  }) {
+    try {
       if (!name) {
         return {
           status: false,
@@ -143,27 +141,17 @@ class MentorServices {
         };
       }
 
-      if (!aboutMe) {
-        return {
-          status: false,
-          status_code: 400,
-          message: "aboutMe wajib diisi",
-          data: {
-            registered_mentor: null,
-          },
-        };
-      }
-
+      const { url } = await Cloudinary.upload(fileScan, newFileCV, newFilePhoto);
       const createdMentor = await mentorRepository.create({
         mentor_id,
         name,
         skill,
         nomorKTP,
-        scanKTP,
-        fileCV,
+        scanKTP: url,
+        fileCV: url,
         linkVideo,
-        filePhoto,
-        aboutMe,  
+        filePhoto: url,
+        aboutMe,
       });
 
       return {
@@ -186,13 +174,22 @@ class MentorServices {
     }
   }
 
-  static async updateByID ({id, mentor_id, name, skill, nomorKTP, scanKTP, fileCV, linkVideo, filePhoto, aboutMe}){
+  static async updateByID({
+    id,
+    mentor_id,
+    name,
+    skill,
+    nomorKTP,
+    scanKTP,
+    fileCV,
+    linkVideo,
+    filePhoto,
+    aboutMe,
+  }) {
     try {
+      const getMentor = await mentorRepository.getMentorByID({ id });
 
-      const getMentor = await mentorRepository.getMentorByID({id});
-
-
-      if (getMentor.mentor_id == mentor_id){
+      if (getMentor.mentor_id == mentor_id) {
         const updatedMentor = await mentorRepository.updateByID({
           id,
           name,
@@ -213,9 +210,8 @@ class MentorServices {
             updated_mentor: updatedMentor,
           },
         };
-
       } else {
-        return{
+        return {
           status: true,
           status_code: 401,
           message: "Update Mentor Unauthorized",
@@ -224,7 +220,6 @@ class MentorServices {
           },
         };
       }
-
     } catch (err) {
       return {
         status: false,
@@ -236,7 +231,6 @@ class MentorServices {
       };
     }
   }
-
 }
 
 module.exports = MentorServices;

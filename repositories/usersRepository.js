@@ -13,7 +13,15 @@ class UsersRepository {
     return getUser;
   }
 
-  static async create({ name, email, password, role, profile_picture, address, phone }) {
+  static async create({
+    name,
+    email,
+    password,
+    role,
+    profile_picture,
+    address,
+    phone,
+  }) {
     const createdUser = User.create({
       name,
       email,
@@ -38,13 +46,6 @@ class UsersRepository {
 
     return getPosts;
   }
-
-  // static async getAll() {
-  //   const getAllUser = await User.findAll({
-  //   });
-
-  //   return getAllUser;
-  // }
 }
 
 module.exports = UsersRepository;

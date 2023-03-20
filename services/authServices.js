@@ -1,6 +1,8 @@
 const usersRepository = require("../repositories/usersRepository");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Cloudinary = require("../utils/cloudinary");
+// const CloudinaryService = require('./cloudinaryServices')
 // const { OAuth2Client } = require("google-auth-library");
 
 const { JWT } = require("../lib/const");
@@ -8,7 +10,15 @@ const { JWT } = require("../lib/const");
 const SALT_ROUND = 10;
 
 class AuthService {
-  static async register({ name, email, password, role, profile_picture, address, phone }) {
+  static async register({
+    name,
+    email,
+    password,
+    role,
+    profile_picture: profilePicture,
+    address,
+    phone,
+  }) {
     try {
       // Payload Validation
       if (!name) {
@@ -87,13 +97,15 @@ class AuthService {
           },
         };
       } else {
+        const {url} = await Cloudinary.upload(profilePicture);
+
         const hashedPassword = await bcrypt.hash(password, SALT_ROUND);
         const createdUser = await usersRepository.create({
           name,
           email,
           password: hashedPassword,
-          role,
-          profile_picture,
+          role: role || "user",
+          profile_picture: url,
           address,
           phone,
         });
@@ -224,58 +236,58 @@ class AuthService {
     }
   }
 
-//   static async loginGoogle({ google_credential: googleCredential }) {
-//     try {
-//       // Get google user credential
-//       const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  //   static async loginGoogle({ google_credential: googleCredential }) {
+  //     try {
+  //       // Get google user credential
+  //       const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-//       const userInfo = await client.verifyIdToken({
-//         idToken: googleCredential,
-//         audience: process.env.GOOGLE_CLIENT_ID,
-//       });
+  //       const userInfo = await client.verifyIdToken({
+  //         idToken: googleCredential,
+  //         audience: process.env.GOOGLE_CLIENT_ID,
+  //       });
 
-//       const { email, name } = userInfo.payload;
+  //       const { email, name } = userInfo.payload;
 
-//       const getUserByEmail = await usersRepository.getByEmail({ email });
+  //       const getUserByEmail = await usersRepository.getByEmail({ email });
 
-//       if (!getUserByEmail) {
-//         await usersRepository.create({
-//           name,
-//           email,
-//           role: "user",
-//         });
-//       }
+  //       if (!getUserByEmail) {
+  //         await usersRepository.create({
+  //           name,
+  //           email,
+  //           role: "user",
+  //         });
+  //       }
 
-//       const token = jwt.sign(
-//         {
-//           id: getUserByEmail.id,
-//           email: getUserByEmail.email,
-//         },
-//         JWT.SECRET,
-//         {
-//           expiresIn: JWT.EXPIRED,
-//         }
-//       );
+  //       const token = jwt.sign(
+  //         {
+  //           id: getUserByEmail.id,
+  //           email: getUserByEmail.email,
+  //         },
+  //         JWT.SECRET,
+  //         {
+  //           expiresIn: JWT.EXPIRED,
+  //         }
+  //       );
 
-//       return {
-//         status: true,
-//         status_code: 200,
-//         message: "User berhasil login",
-//         data: {
-//           token,
-//         },
-//       };
-//     } catch (err) {
-//       return {
-//         status: false,
-//         status_code: 500,
-//         message: err.message,
-//         data: {
-//           registered_user: null,
-//         },
-//       };
-//     }
-//   }
+  //       return {
+  //         status: true,
+  //         status_code: 200,
+  //         message: "User berhasil login",
+  //         data: {
+  //           token,
+  //         },
+  //       };
+  //     } catch (err) {
+  //       return {
+  //         status: false,
+  //         status_code: 500,
+  //         message: err.message,
+  //         data: {
+  //           registered_user: null,
+  //         },
+  //       };
+  //     }
+  //   }
 }
 
 module.exports = AuthService;

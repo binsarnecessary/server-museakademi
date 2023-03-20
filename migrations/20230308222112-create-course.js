@@ -10,13 +10,17 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       course_id: {
-        type: Sequelize.STRING
+        autoIncrement: true,
+        type: Sequelize.INTEGER
+      },
+      isCoursePaid: {
+        type: Sequelize.BOOLEAN
       },
       courseTitle: {
         type: Sequelize.STRING
       },
       courseDescription: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       courseStartDate: {
         type: Sequelize.STRING
@@ -47,6 +51,61 @@ module.exports = {
       },
       courseDeadline: {
         type: Sequelize.STRING
+      },
+      namaMentor: {
+        type: Sequelize.STRING
+      },
+      sesi1: {
+        type: Sequelize.STRING
+      },
+      link1: {
+        type: Sequelize.STRING
+      },
+      sesi2: {
+        type: Sequelize.STRING
+      },
+      link2: {
+        type: Sequelize.STRING
+      },
+      sesi3: {
+        type: Sequelize.STRING
+      },
+      link3: {
+        type: Sequelize.STRING
+      },
+      sesi4: {
+        type: Sequelize.STRING
+      },
+      link4: {
+        type: Sequelize.STRING
+      },
+      sesi5: {
+        type: Sequelize.STRING
+      },
+      link5: {
+        type: Sequelize.STRING
+      },
+      sesi6: {
+        type: Sequelize.STRING
+      },
+      link6: {
+        type: Sequelize.STRING
+      },
+      sesi7: {
+        type: Sequelize.STRING
+      },
+      link7: {
+        type: Sequelize.STRING
+      },
+      sesi8: {
+        type: Sequelize.STRING
+      },
+      link8: {
+        type: Sequelize.STRING
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
