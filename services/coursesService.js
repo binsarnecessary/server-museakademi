@@ -22,7 +22,7 @@ class coursesService {
         status_code: 500,
         message: err.message,
         data: {
-          registered_course: null,
+          course: null,
         },
       };
     }
@@ -60,24 +60,13 @@ class coursesService {
     link8,
   }) {
     try {
-      if (!course_id) {
-        return {
-          status: false,
-          status_code: 400,
-          message: "Course_id wajib diisi",
-          data: {
-            registered_course: null,
-          },
-        };
-      }
-
       if (!courseTitle) {
         return {
           status: false,
           status_code: 400,
           message: "Title wajib diisi",
           data: {
-            registered_course: null,
+            course: null,
           },
         };
       }
@@ -88,7 +77,7 @@ class coursesService {
           status_code: 400,
           message: "Description wajib diisi",
           data: {
-            registered_course: null,
+            course: null,
           },
         };
       }
@@ -155,7 +144,7 @@ class coursesService {
           status_code: 404,
           message: "User tidak ditemukan",
           data: {
-            deleted_user: null,
+            deleted_course: null,
           },
         };
 

@@ -30,14 +30,14 @@ class MentorServices {
 
   static async getAll({}) {
     try {
-      const getAllMentor = await mentorRepository.getAll;
+      const getAllMentor = await mentorRepository.getAll();
 
       return {
         status: true,
         status_code: 200,
         message: "Success",
         data: {
-          posts: getAllMentor,
+          mentor: getAllMentor,
         },
       };
     } catch (err) {
@@ -57,10 +57,10 @@ class MentorServices {
     name,
     skill,
     nomorKTP,
-    scanKTP: fileScan,
-    fileCV : newFileCV,
+    scanKTP,
+    fileCV ,
     linkVideo,
-    filePhoto :newFilePhoto,
+    filePhoto,
     aboutMe,
   }) {
     try {
@@ -141,16 +141,15 @@ class MentorServices {
         };
       }
 
-      const { url } = await Cloudinary.upload(fileScan, newFileCV, newFilePhoto);
       const createdMentor = await mentorRepository.create({
         mentor_id,
         name,
         skill,
         nomorKTP,
-        scanKTP: url,
-        fileCV: url,
+        scanKTP,
+        fileCV,
         linkVideo,
-        filePhoto: url,
+        filePhoto,
         aboutMe,
       });
 

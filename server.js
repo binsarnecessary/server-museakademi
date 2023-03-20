@@ -15,6 +15,7 @@ const authController = require("./controllers/authController.js");
 const courseController = require("./controllers/courseController");
 const mentorController = require("./controllers/mentorController");
 const usersController = require("./controllers/usersController");
+const livestreamingController = require("./controllers/livestreamingController");
 
 // Import Midleware
 const middleware = require("./middlewares/auth");
@@ -27,22 +28,17 @@ app.post("/auth/login", authController.login);
 app.get("/auth/me", middleware.authenticate, authController.currentUser);
 
 //User
-app.delete("/api/users/:id", usersController.deleteByID)
 // app.get("/api/users", middleware.authenticate, middleware.isAdmin, usersController.getAllUsers);
 app.get("/api/users", usersController.getAllUsers);
 app.get("/api/users", usersController.getAllUsers);
 app.patch("/api/users/:id",upload.none(), usersController.updateUser)
-  
+app.delete("/api/users/:id", usersController.deleteByID)
 
 // app.post("/auth/login-google", authController.loginGoogle);
 
 //Mentor
-app.post("/api/mentor", upload.fields([
-  { name: "scanKTP", maxCount: 1 },
-  { name: "fileCV", maxCount: 1 },
-  { name: "filePhoto", maxCount: 1 }
-]), mentorController.create);
-app.put("/api/mentor/:id", mentorController.updateByID);
+app.post("/api/mentor", upload.none(), mentorController.create);
+app.patch("/api/mentor/:id",upload.none(), mentorController.updateMentor);
 app.get("/api/mentor/:id", mentorController.getMentorByID);
 app.get("/api/mentor", mentorController.getAll)
 
@@ -52,13 +48,12 @@ app.get("/api/course", courseController.getAllCourse);
 app.post("/api/course",upload.single("coursePhoto"), courseController.createCourse)
 app.delete("/api/course/:id", courseController.deleteCourseById)
 
+//Livestreaming
+app.get("/api/livestreaming/:id", livestreamingController.getLiveByID)
+app.get("/api/livestreaming", livestreamingController.getAllLive)
+app.post("/api/livestreaming",upload.single("thumbnailLivestreaming"), livestreamingController.createLive)
+app.delete("/api/livestreaming/:id", livestreamingController.deleteLive)
 
-app.delete(
-  "/users/:id",
-  middleware.authenticate,
-  middleware.isAdmin,
-  usersController.deleteByID
-);
 
 // API Documentation
 // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
