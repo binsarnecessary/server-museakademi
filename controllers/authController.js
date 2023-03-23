@@ -7,7 +7,7 @@ const register = async (req, res) => {
     name,
     email,
     password,
-    role,
+    role: role || 'user',
     profile_picture: req.file,
     address,
     phone,

@@ -16,6 +16,7 @@ const courseController = require("./controllers/courseController");
 const mentorController = require("./controllers/mentorController");
 const usersController = require("./controllers/usersController");
 const livestreamingController = require("./controllers/livestreamingController");
+const orderController = require("./controllers/orderController");
 
 // Import Midleware
 const middleware = require("./middlewares/auth");
@@ -55,6 +56,9 @@ app.get("/api/livestreaming", livestreamingController.getAllLive)
 app.post("/api/livestreaming",upload.single("thumbnailLivestreaming"), livestreamingController.createLive)
 app.delete("/api/livestreaming/:id", livestreamingController.deleteLive)
 app.patch("/api/livestreaming/:id",upload.none(), livestreamingController.updateLivestreaming);
+
+//Order
+app.post("/api/order", upload.none(), orderController.generateOrder);
 
 
 // API Documentation
