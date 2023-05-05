@@ -9,6 +9,12 @@ class courseRepository {
     return getCourse;
   }
 
+  static async getCourseByStatusPaid({ isCoursePaid }) {
+    const courses = await course.findAll({ where: { isCoursePaid } });
+    return courses;
+  }
+  
+
   static async getAllCourse() {
       const getAllCourse = await course.findAll({
 
@@ -82,33 +88,6 @@ class courseRepository {
 
     return createCourse;
   }
-
-  // static async updateCourseByID({ id, courseTitle, description,
-  //     courseStartDate, courseEndDate, coursePrice, courseStatus,
-  //     courseTimeStart, courseTimeEnd, coursePhoto, courseCategory,
-  //     courseRating, courseDeadline
-  // }){
-  //     const updatedCourse = await course.update
-  //     ({
-  //         id,
-  //         courseTitle,
-  //         description,
-  //         courseStartDate,
-  //         courseEndDate,
-  //         coursePrice,
-  //         courseStatus,
-  //         courseTimeStart,
-  //         courseTimeEnd,
-  //         coursePhoto,
-  //         courseCategory,
-  //         courseRating,
-  //         courseDeadline
-  //     },
-  //     {where: {id}}
-  //     );
-
-  //     return updatedCourse;
-  // }
 
   static async deleteCourseById({ id }) {
     const deletedCourse = await course.destroy({ where: { id } });

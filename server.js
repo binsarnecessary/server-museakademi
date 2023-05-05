@@ -17,6 +17,8 @@ const mentorController = require("./controllers/mentorController");
 const usersController = require("./controllers/usersController");
 const livestreamingController = require("./controllers/livestreamingController");
 const orderController = require("./controllers/orderController");
+const mitraController = require("./controllers/mitraController");
+
 
 // Import Midleware
 const middleware = require("./middlewares/auth");
@@ -45,10 +47,15 @@ app.get("/api/mentor", mentorController.getAll)
 
 //Course
 app.get("/api/course/:id", courseController.getCourseByID)
+app.get("/api/course/paid/:isCoursePaid", courseController.getCourseByStatusPaid)
 app.get("/api/course", courseController.getAllCourse);
 app.post("/api/course",upload.single("coursePhoto"), courseController.createCourse)
 app.delete("/api/course/:id", courseController.deleteCourseById)
 app.patch("/api/course/:id",upload.none(), courseController.updateCourse);
+
+//Mitra
+app.get("/api/mitra", mitraController.getAllMitra);
+app.post("/api/mitra",upload.single("logoMitra"), mitraController.createMitra);
 
 //Livestreaming
 app.get("/api/livestreaming/:id", livestreamingController.getLiveByID)
@@ -69,9 +76,7 @@ app.use("/public/files", express.static(path.join(__dirname, "/storages")));
 
 app.listen(process.env.PORT, () => {
   console.log(
-    `Server berhasil berjalan di port http://localhost:${
-      process.env.PORT
-    }`
+    `Server berhasil berjalan Welkom To API Museakademi`
   );
 });
 

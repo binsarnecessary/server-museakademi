@@ -16,6 +16,21 @@ const getCourseByID = async (req, res, next) => {
   });
 };
 
+const getCourseByStatusPaid = async (req, res, next) => {
+  const { isCoursePaid } = req.params;
+
+  const { status, status_code, message, data } =
+    await coursesService.getCourseByStatusPaid({
+      isCoursePaid,
+    });
+
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  });
+};
+
 const createCourse = async (req, res, next) => {
   const {
     course_id,
@@ -133,6 +148,7 @@ const updateCourse = async (req, res) => {
 
 module.exports = {
   getCourseByID,
+  getCourseByStatusPaid,
   createCourse,
   getAllCourse,
   deleteCourseById,

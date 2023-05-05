@@ -28,6 +28,32 @@ class coursesService {
     }
   }
 
+  static async getCourseByStatusPaid({ isCoursePaid }) {
+    try {
+      const getCoursePaid = await courseRepository.getCourseByStatusPaid({
+        isCoursePaid,
+      });
+
+      return {
+        status: true,
+        status_code: 200,
+        message: "Success",
+        data: {
+          course: getCoursePaid,
+        },
+      };
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          course: null,
+        },
+      };
+    }
+  }
+
   static async create({
     course_id,
     isCoursePaid,
@@ -171,46 +197,6 @@ class coursesService {
       };
     }
   }
-
-  //   static async updateCourseByID ({title, description}){
-  //     try{
-  //       const getCourse = await courseRepository.getCourseByID({id});
-
-  //       if (getCourse.id == id){
-  //         const updatedCourse = await courseRepository.updateCourseByID({
-  //           title,
-  //           description
-  //         });
-
-  //         return {
-  //           status: true,
-  //           status_code: 200,
-  //           message: "Course updated successfully",
-  //           data: {
-  //             updated_course: updatedCourse,
-  //           },
-  //         };
-  //       } else {
-  //         return{
-  //           status: true,
-  //           status_code: 401,
-  //           message: "Update Course Unauthorized",
-  //           data: {
-  //             updated_course: null,
-  //           },
-  //         };
-  //       }
-  //     } catch (err) {
-  //       return {
-  //         status: false,
-  //         status_code: 500,
-  //         message: err.message,
-  //         data: {
-  //           registered_course: null,
-  //         },
-  //       };
-  //     }
-  //   }
 
   static async getAllCourse({}) {
     try {
