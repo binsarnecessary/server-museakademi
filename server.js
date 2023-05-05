@@ -76,7 +76,7 @@ app.use("/public/files", express.static(path.join(__dirname, "/storages")));
 
 app.listen(process.env.PORT, () => {
   console.log(
-    `Server berhasil berjalan Welkom To API Museakademi`
+    "Server berhasil berjalan Welkom To API Museakademi"
   );
 });
 
