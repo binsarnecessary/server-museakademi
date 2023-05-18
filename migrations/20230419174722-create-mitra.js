@@ -16,7 +16,22 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER
       },
+      emailMitra: {
+        type: Sequelize.STRING
+      },
       nameMitra: {
+        type: Sequelize.STRING
+      },
+      instagramMitra: {
+        type: Sequelize.STRING
+      },
+      facebookMitra: {
+        type: Sequelize.STRING
+      },
+      waMitra: {
+        type: Sequelize.STRING
+      },
+    alamatMitra: {
         type: Sequelize.STRING
       },
       courseMitra: {

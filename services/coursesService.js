@@ -54,6 +54,32 @@ class coursesService {
     }
   }
 
+  static async getCourseByMitra({ slugMitra }) {
+    try {
+      const getCourseMitra = await courseRepository.getCourseByMitra({
+        slugMitra,
+      });
+
+      return {
+        status: true,
+        status_code: 200,
+        message: "Success",
+        data: {
+          course: getCourseMitra,
+        },
+      };
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          course: null,
+        },
+      };
+    }
+  }
+
   static async create({
     course_id,
     isCoursePaid,
@@ -70,6 +96,7 @@ class coursesService {
     courseRating,
     courseDeadline,
     namaMentor,
+    slugMitra,
     sesi1,
     link1,
     sesi2,
@@ -124,6 +151,7 @@ class coursesService {
         courseRating,
         courseDeadline,
         namaMentor,
+        slugMitra,
         sesi1,
         link1,
         sesi2,

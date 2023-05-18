@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
     courseRating: DataTypes.STRING,
     courseDeadline: DataTypes.STRING,
     namaMentor: DataTypes.STRING,
+    mitraId: DataTypes.INTEGER,
+    slugMitra: DataTypes.STRING,
     sesi1: DataTypes.STRING,
     link1: DataTypes.STRING,
     sesi2: DataTypes.STRING,

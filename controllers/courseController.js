@@ -31,6 +31,21 @@ const getCourseByStatusPaid = async (req, res, next) => {
   });
 };
 
+const getCourseByMitra = async (req, res, next) => {
+  const { slugMitra } = req.params;
+
+  const { status, status_code, message, data } =
+    await coursesService.getCourseByMitra({
+      slugMitra,
+    });
+
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  });
+};
+
 const createCourse = async (req, res, next) => {
   const {
     course_id,
@@ -48,6 +63,7 @@ const createCourse = async (req, res, next) => {
     courseRating,
     courseDeadline,
     namaMentor,
+    slugMitra,
     sesi1,
     link1,
     sesi2,
@@ -80,6 +96,7 @@ const createCourse = async (req, res, next) => {
     courseRating,
     courseDeadline,
     namaMentor,
+    slugMitra,
     sesi1,
     link1,
     sesi2,
@@ -149,6 +166,7 @@ const updateCourse = async (req, res) => {
 module.exports = {
   getCourseByID,
   getCourseByStatusPaid,
+  getCourseByMitra,
   createCourse,
   getAllCourse,
   deleteCourseById,

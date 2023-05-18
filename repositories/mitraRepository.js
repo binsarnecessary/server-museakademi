@@ -9,9 +9,30 @@ class MitraRepository {
     return getAllMitra;
   }
 
-  static async create({ nameMitra, courseMitra, logoMitra, slug }) {
+  static async getMitraBySlug({ slug }) {
+    const getSlugMitra = await Mitra.findOne({ where: { slug } });
+
+    return getSlugMitra;
+  }
+
+  static async create({
+    emailMitra,
+    nameMitra,
+    instagramMitra,
+    facebookMitra,
+    waMitra,
+    alamatMitra,
+    courseMitra,
+    logoMitra,
+    slug,
+  }) {
     const createMitra = Mitra.create({
+      emailMitra,
       nameMitra,
+      instagramMitra,
+      facebookMitra,
+      waMitra,
+      alamatMitra,
       courseMitra,
       logoMitra,
       slug,

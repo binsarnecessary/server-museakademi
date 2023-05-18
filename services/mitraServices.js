@@ -26,7 +26,43 @@ class MitraService {
     }
   }
 
-  static async create({ nameMitra, courseMitra, logoMitra: logo, slug }) {
+  static async getMitraBySlug({ slug }) {
+    try {
+      const getSlugMitra = await mitraRepository.getMitraBySlug({
+        slug,
+      });
+
+      return {
+        status: true,
+        status_code: 200,
+        message: "Success",
+        data: {
+          Mitra: getSlugMitra,
+        },
+      };
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          Mitra: null,
+        },
+      };
+    }
+  }
+
+  static async create({
+    emailMitra,
+    nameMitra,
+    instagramMitra,
+    facebookMitra,
+    waMitra,
+    alamatMitra,
+    courseMitra,
+    logoMitra: logo,
+    slug,
+  }) {
     try {
       if (!nameMitra) {
         return {
@@ -49,10 +85,15 @@ class MitraService {
           },
         };
       }
-      const slug_link = nameMitra.replace(/\s+/g, '-').toLowerCase();
+      const slug_link = nameMitra.replace(/\s+/g, "-").toLowerCase();
       const { url } = await Cloudinary.upload(logo);
       const createdMitra = await mitraRepository.create({
+        emailMitra,
         nameMitra,
+        instagramMitra,
+        facebookMitra,
+        waMitra,
+        alamatMitra,
         courseMitra,
         logoMitra: url,
         slug: slug_link,
@@ -77,7 +118,6 @@ class MitraService {
       };
     }
   }
-
 }
 
 module.exports = MitraService;

@@ -11,9 +11,15 @@ class courseRepository {
 
   static async getCourseByStatusPaid({ isCoursePaid }) {
     const courses = await course.findAll({ where: { isCoursePaid } });
+
     return courses;
   }
   
+  static async getCourseByMitra({ slugMitra }) {
+    const courses = await course.findAll({ where: { slugMitra } });
+    
+    return courses;
+  }
 
   static async getAllCourse() {
       const getAllCourse = await course.findAll({
@@ -39,6 +45,7 @@ class courseRepository {
     courseRating,
     courseDeadline,
     namaMentor,
+    slugMitra,
     sesi1,
     link1,
     sesi2,
@@ -70,6 +77,7 @@ class courseRepository {
       courseRating,
       courseDeadline,
       namaMentor,
+      slugMitra,
       sesi1,
       link1,
       sesi2,

@@ -12,11 +12,41 @@ const getAllMitra = async (req, res, next) => {
   });
 };
 
+const getMitraBySlug = async (req, res, next) => {
+  const { slug } = req.params;
+
+  const { status, status_code, message, data } =
+    await mitraService.getMitraBySlug({
+      slug,
+    });
+
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  });
+};
+
 const createMitra = async (req, res, next) => {
-  const { nameMitra, courseMitra, logoMitra, slug } = req.body;
+  const {
+    emailMitra,
+    nameMitra,
+    instagramMitra,
+    facebookMitra,
+    waMitra,
+    alamatMitra,
+    courseMitra,
+    logoMitra,
+    slug,
+  } = req.body;
 
   const { status, status_code, message, data } = await mitraService.create({
+    emailMitra,
     nameMitra,
+    instagramMitra,
+    facebookMitra,
+    waMitra,
+    alamatMitra,
     courseMitra,
     logoMitra: req.file,
     slug,
@@ -32,4 +62,5 @@ const createMitra = async (req, res, next) => {
 module.exports = {
   getAllMitra,
   createMitra,
+  getMitraBySlug,
 };

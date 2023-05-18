@@ -55,6 +55,12 @@ module.exports = {
       namaMentor: {
         type: Sequelize.STRING
       },
+      mitraId: {
+        type: Sequelize.INTEGER
+      },
+      slugMitra: {
+        type: Sequelize.STRING
+      },
       sesi1: {
         type: Sequelize.STRING
       },

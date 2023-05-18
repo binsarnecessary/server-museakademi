@@ -48,6 +48,7 @@ app.get("/api/mentor", mentorController.getAll)
 //Course
 app.get("/api/course/:id", courseController.getCourseByID)
 app.get("/api/course/paid/:isCoursePaid", courseController.getCourseByStatusPaid)
+app.get("/api/course/mitra/:slugMitra", courseController.getCourseByMitra)
 app.get("/api/course", courseController.getAllCourse);
 app.post("/api/course",upload.single("coursePhoto"), courseController.createCourse)
 app.delete("/api/course/:id", courseController.deleteCourseById)
@@ -56,6 +57,7 @@ app.patch("/api/course/:id",upload.none(), courseController.updateCourse);
 //Mitra
 app.get("/api/mitra", mitraController.getAllMitra);
 app.post("/api/mitra",upload.single("logoMitra"), mitraController.createMitra);
+app.get("/api/mitra/:slug", mitraController.getMitraBySlug)
 
 //Livestreaming
 app.get("/api/livestreaming/:id", livestreamingController.getLiveByID)

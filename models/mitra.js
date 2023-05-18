@@ -15,7 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Mitra.init({
     mitraId: DataTypes.INTEGER,
+    emailMitra: DataTypes.STRING,
     nameMitra: DataTypes.STRING,
+    instagramMitra: DataTypes.STRING,
+    facebookMitra: DataTypes.STRING,
+    waMitra: DataTypes.STRING,
+    alamatMitra: DataTypes.STRING,
     courseMitra: DataTypes.STRING,
     logoMitra: DataTypes.STRING,
     slug: DataTypes.STRING,
