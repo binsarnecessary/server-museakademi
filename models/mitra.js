@@ -11,17 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Mitra.hasMany(models.course, {as: 'courseMitra'})
     }
   }
   Mitra.init({
-    mitraId: DataTypes.INTEGER,
     emailMitra: DataTypes.STRING,
     nameMitra: DataTypes.STRING,
     instagramMitra: DataTypes.STRING,
     facebookMitra: DataTypes.STRING,
     waMitra: DataTypes.STRING,
     alamatMitra: DataTypes.STRING,
-    courseMitra: DataTypes.STRING,
+    courseTitle: DataTypes.STRING,
+    courseId: DataTypes.INTEGER,
     logoMitra: DataTypes.STRING,
     slug: DataTypes.STRING,
   }, {

@@ -11,10 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      course.belongsTo(models.Mitra, {foreignKey: 'mitraId', as: 'mitra' })
+      
     }
   }
   course.init({
-    course_id: DataTypes.STRING,
     isCoursePaid: DataTypes.BOOLEAN,
     courseTitle: DataTypes.STRING,
     courseDescription: DataTypes.TEXT,

@@ -5,11 +5,7 @@ module.exports = {
     await queryInterface.createTable('Livestreamings', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      livestreaming_id: {
         autoIncrement: true,
         type: Sequelize.INTEGER
       },

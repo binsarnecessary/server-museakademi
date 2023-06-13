@@ -1,18 +1,12 @@
 'use strict';
 
-const { sequelize } = require('../models');
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Mitras', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      mitraId: {
         autoIncrement: true,
         type: Sequelize.INTEGER
       },
@@ -31,11 +25,11 @@ module.exports = {
       waMitra: {
         type: Sequelize.STRING
       },
-    alamatMitra: {
+      alamatMitra: {
         type: Sequelize.STRING
       },
-      courseMitra: {
-        type: Sequelize.STRING
+      courseTitle: {
+        type: Sequelize.STRING,
       },
       logoMitra: {
         type: Sequelize.STRING

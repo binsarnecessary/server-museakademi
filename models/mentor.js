@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   mentor.init({
-    mentor_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     skill: DataTypes.STRING,
     nomorKTP: DataTypes.STRING,

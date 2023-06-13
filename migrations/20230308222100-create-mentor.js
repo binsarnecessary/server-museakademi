@@ -5,11 +5,7 @@ module.exports = {
     await queryInterface.createTable('mentors', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      mentor_id: {
         autoIncrement: true,
         type: Sequelize.INTEGER
       },
