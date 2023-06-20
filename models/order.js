@@ -11,15 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      
+      order.belongsTo(models.User, {foreignKey: 'user_id', as: 'user'})
+      order.belongsTo(models.course, {foreignKey: 'course_id', as: 'course'})
+      order.hasOne(models.transactionhistory, {as: 'transactionhistory'})
     }
   }
   order.init({
+    order_id: DataTypes.STRING,
     course_id: DataTypes.INTEGER,
-    course_price: DataTypes.INTEGER,
+    gross_amount: DataTypes.FLOAT,
     transaction_url: DataTypes.STRING,
     transaction_id: DataTypes.STRING,
-    payment_status: DataTypes.STRING,
+    transaction_status: DataTypes.STRING,
+    user_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'order',

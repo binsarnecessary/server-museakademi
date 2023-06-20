@@ -35,9 +35,11 @@ const createMitra = async (req, res, next) => {
     facebookMitra,
     waMitra,
     alamatMitra,
-    courseMitra,
+    courseTitle,
     logoMitra,
     slug,
+    headTagline,
+    paragraphText,
   } = req.body;
 
   const { status, status_code, message, data } = await mitraService.create({
@@ -47,9 +49,11 @@ const createMitra = async (req, res, next) => {
     facebookMitra,
     waMitra,
     alamatMitra,
-    courseMitra,
+    courseTitle,
     logoMitra: req.file,
     slug,
+    headTagline,
+    paragraphText,
   });
 
   res.status(status_code).send({

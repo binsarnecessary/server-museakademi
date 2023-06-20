@@ -40,7 +40,7 @@ module.exports = {
       coursePhoto: {
         type: Sequelize.STRING,
       },
-      categoryId: {
+      category_id: {
         type: Sequelize.INTEGER,
         references: {      
           model: 'Categories',
@@ -56,8 +56,14 @@ module.exports = {
       namaMentor: {
         type: Sequelize.STRING,
       },
-      mitraId: {
-        allowNull:false,
+      mentor_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'mentors',
+          key: 'id',
+        },
+      },
+      mitra_id: {
         type: Sequelize.INTEGER,
         references: {      
           model: 'Mitras',

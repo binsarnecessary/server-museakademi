@@ -63,6 +63,7 @@ const updateUser = async (req, res) => {
   } catch (err) {
     console.log(err.message)
   }
+
 };
 
 module.exports = { getPostsByID, deleteByID, getAllUsers, updateUser };

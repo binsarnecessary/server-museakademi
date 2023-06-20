@@ -1,21 +1,25 @@
 const { v4: uuidv4 } = require('uuid');
 const midtransClient = require('midtrans-client');
 const ordersServices = require('../services/ordersServices');
+const axios = require('axios');
+const base64 = require('base-64');
+const { order } = require("../models")
+
 
 const snap = new midtransClient.Snap({
   isProduction: false,
-  serverKey: 'SB-Mid-server-bQ2zbO4r398FPMd-waqotOxY',
+  serverKey: 'SB-Mid-server-WcPq1FjKxRsyoLgxdKuSY_Fb',
 });
 
 const generateOrder = async (req, res) => {
     const order_id = uuidv4();
 
-    const { course_id, course_price } = req.body;
+    const { user_id, course_id, gross_amount } = req.body;
     
     let parameter = {
       "transaction_details": {
         "order_id": order_id,
-        "gross_amount": course_price,
+        "gross_amount": gross_amount,
       },
       "credit_card": {
         "secure": true
@@ -50,10 +54,11 @@ const generateOrder = async (req, res) => {
       const { status, status_code, message, data } = await ordersServices.createOrder({
         course_id,
         order_id: order_id,
-        course_price,
+        gross_amount,
         transaction_url: transactionUrl,
         transaction_id: transactionToken,
-        payment_status:null
+        user_id,
+        transaction_status: "pending"
       });
 
   res.status(status_code).send({
@@ -61,63 +66,68 @@ const generateOrder = async (req, res) => {
     message: message,
     data: data,
   });
-
-  
-  // try {
-
-  //   const parameters = {
-  //     "transaction_details": {
-  //       "order_id": order_id,
-  //       "gross_amount": 1
-  //     },
-  //   };
-
-    // const transaction = await snap.createTransaction(parameters);
-    // const transactionToken = transaction.token;
-    // const transactionUrl = transaction.redirect_url;
-
-    // const responseData = {
-    //   orderId: order_id,
-    //   transactionToken: transactionToken,
-    //   transactionUrl: transactionUrl,
-    //   }
-
-  //     console.log(responseData)
-
-  //   res.status(200).json({
-  //     message: 'Transaction created successfully',
-  //     data: {
-  //       orderId: order_id,
-  //       transactionToken: transactionToken,
-  //       transactionUrl: transactionUrl,
-  //     },
-  //   });
-  // } catch (error) {
-  //   console.log(error);
-  //   res.status(500).json({
-  //     message: 'Failed to create transaction',
-  //     data: null,
-  //   });
-  // }
-
-  // const createOrder = async (req, res) => {
-  //   const transaction = req.params;
-  
-  //   const { status, status_code, message, data } = await orderRepository.createOrder({
-  //     order_id,
-  //     course_id,
-  //     gross_amount,
-  //     midtrans_response
-  //   });
-  
-  //   res.status(status_code).send({
-  //     status: status,
-  //     message: message,
-  //     data: data,
-  //   });
-  // };
-
 };
 
+const createTransaction = async (req, res) => {
 
-module.exports = { generateOrder };
+  try {
+    await order.update(req.body, {
+      where: {id: req.params.id},
+    });
+    res.status(200).send({
+      status: true,
+      message: 'Updated Mentor Succes',
+      data: {
+        Order: order
+      }
+    })
+  }
+  catch (err){
+    console.log(err.message)
+  }
+
+  // const { order_id, transaction_status, gross_amount } = req.body;
+
+  // const { status, status_code, message, data } = await ordersServices.createTransaction({
+  //     order_id,
+  //     transaction_status,
+  //     gross_amount
+  // });
+
+  // res.status(status_code).send({
+  //   status: status,
+  //   message: message,
+  //   data: data,
+  // });
+};
+
+const getOrderByOrderID = async (req, res, next) => {
+  const { order_id } = req.params;
+
+  const { status, status_code, message, data } =
+    await ordersServices.getOrderByOrderID({
+      order_id,
+    });
+
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  });
+};
+
+const getAllOrder = async (req, res, next) => {
+
+  const { status, status_code, message, data } =
+  await ordersServices.getAllOrder({
+  });
+
+res.status(status_code).send({
+  status: status,
+  message: message,
+  data: data,
+});
+}
+
+
+module.exports = { generateOrder, createTransaction, getOrderByOrderID, getAllOrder };

@@ -37,6 +37,12 @@ module.exports = {
       slug: {
         type: Sequelize.STRING
       },
+      headTagline: {
+        type: Sequelize.TEXT,
+      },
+      paragraphText: {
+        type: Sequelize.TEXT,
+      },
       deletedAt: {
         allowNull: true,
         type: Sequelize.DATE

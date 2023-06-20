@@ -48,11 +48,10 @@ const updateMentor = async (req, res) => {
 };
 
   const create = async (req, res, next) => {
-    const { mentor_id, name, skill, nomorKTP, scanKTP, fileCV, linkVideo, filePhoto, aboutMe } = req.body;
+    const { user_id, skill, nomorKTP, scanKTP, fileCV, linkVideo, filePhoto, aboutMe } = req.body;
   
     const { status, status_code, message, data } = await mentorsService.create({
-        mentor_id,
-        name,
+        user_id,
         skill,
         nomorKTP,
         scanKTP,

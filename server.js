@@ -18,6 +18,10 @@ const usersController = require("./controllers/usersController");
 const livestreamingController = require("./controllers/livestreamingController");
 const orderController = require("./controllers/orderController");
 const mitraController = require("./controllers/mitraController");
+const transactionController = require("./controllers/transactionController");
+const categoryController = require("./controllers/categoryController");
+const tugasController = require("./controllers/tugasController");
+const nilaiController = require("./controllers/nilaiController");
 
 
 // Import Midleware
@@ -50,6 +54,8 @@ app.get("/api/course/:id", courseController.getCourseByID)
 app.get("/api/course/paid/:isCoursePaid", courseController.getCourseByStatusPaid)
 app.get("/api/course/mitra/:slugMitra", courseController.getCourseByMitra)
 app.get("/api/course", courseController.getAllCourse);
+app.get("/api/course/category/:category_id", courseController.getAllCourseByCategory)
+app.get("/api/course/purchased/:id", courseController.coursePurchased);
 app.post("/api/course",upload.single("coursePhoto"), courseController.createCourse)
 app.delete("/api/course/:id", courseController.deleteCourseById)
 app.patch("/api/course/:id",upload.none(), courseController.updateCourse);
@@ -68,6 +74,27 @@ app.patch("/api/livestreaming/:id",upload.none(), livestreamingController.update
 
 //Order
 app.post("/api/order", upload.none(), orderController.generateOrder);
+
+//TransactionHistory
+app.post("/api/handling", upload.none(), transactionController.createTransaction);
+app.get("/api/order/:id", transactionController.getOrderByOrderID);
+app.get("/api/order", transactionController.getAllOrder);
+
+//Category
+app.post("/api/category", upload.none(), categoryController.createCategory);
+app.get("/api/category/:id", categoryController.getCategoryById);
+app.get("/api/category", categoryController.getAllCategory);
+app.get("/api/category/course", categoryController.getAllCategoryWithCourse);
+
+//Tugas
+app.post("/api/tugas", upload.none(), tugasController.createTugas);
+app.get("/api/tugas", tugasController.getAllTugas)
+app.get("/api/tugas/:id", tugasController.getTugasById)
+app.delete("/api/tugas/:id", tugasController.deleteByID)
+
+//Nilai
+app.post("/api/nilai", upload.none(), nilaiController.createNilai);
+app.get("/api/nilai", nilaiController.getAllNilai)
 
 
 // API Documentation

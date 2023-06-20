@@ -59,9 +59,11 @@ class MitraService {
     facebookMitra,
     waMitra,
     alamatMitra,
-    courseMitra,
+    courseTitle,
     logoMitra: logo,
     slug,
+    headTagline,
+    paragraphText,
   }) {
     try {
       if (!nameMitra) {
@@ -75,7 +77,7 @@ class MitraService {
         };
       }
 
-      if (!courseMitra) {
+      if (!courseTitle) {
         return {
           status: false,
           status_code: 400,
@@ -94,9 +96,11 @@ class MitraService {
         facebookMitra,
         waMitra,
         alamatMitra,
-        courseMitra,
+        courseTitle,
         logoMitra: url,
         slug: slug_link,
+        headTagline,
+        paragraphText,
       });
 
       return {

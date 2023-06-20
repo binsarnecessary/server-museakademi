@@ -22,9 +22,11 @@ class MitraRepository {
     facebookMitra,
     waMitra,
     alamatMitra,
-    courseMitra,
+    courseTitle,
     logoMitra,
     slug,
+    headTagline,
+    paragraphText,
   }) {
     const createMitra = Mitra.create({
       emailMitra,
@@ -33,9 +35,11 @@ class MitraRepository {
       facebookMitra,
       waMitra,
       alamatMitra,
-      courseMitra,
+      courseTitle,
       logoMitra,
       slug,
+      headTagline,
+      paragraphText,
     });
 
     return createMitra;

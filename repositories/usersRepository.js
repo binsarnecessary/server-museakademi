@@ -40,12 +40,7 @@ class UsersRepository {
 
     return deletedUser;
   }
-
-  static async getPostsByID({ id }) {
-    const getPosts = await Post.findAll({ where: { user_id: id } });
-
-    return getPosts;
-  }
+  
 }
 
 module.exports = UsersRepository;

@@ -56,7 +56,7 @@ class coursesService {
 
   static async getCourseByMitra({ slugMitra }) {
     try {
-      const getCourseMitra = await courseRepository.getCourseByMitra({
+      const getcourseTitle = await courseRepository.getCourseByMitra({
         slugMitra,
       });
 
@@ -65,7 +65,7 @@ class coursesService {
         status_code: 200,
         message: "Success",
         data: {
-          course: getCourseMitra,
+          course: getcourseTitle,
         },
       };
     } catch (err) {
@@ -80,8 +80,55 @@ class coursesService {
     }
   }
 
+  static async getAllCourseByCategory({category_id}) {
+    try {
+      const getAllCourseByCategory = await courseRepository.getAllCourseByCategory({category_id})
+
+      return {
+        status: true,
+        status_code:200,
+        message: 'Success',
+        data: {
+          course: getAllCourseByCategory,
+        }
+      };
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          course: null
+        }
+      };
+    }
+  }
+
+  static async coursePurchase({id}) {
+    try {
+      const coursePurchase = await courseRepository.coursesPurchase({id})
+
+      return {
+        status: true,
+        status_code: 200,
+        message: 'Success',
+        data: {
+          course: coursePurchase
+        }
+      }
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          course: null
+        }
+      }
+    }
+  }
+
   static async create({
-    course_id,
     isCoursePaid,
     courseTitle,
     courseDescription,
@@ -92,10 +139,12 @@ class coursesService {
     courseTimeStart,
     courseTimeEnd,
     coursePhoto: thumbnailCourse,
-    courseCategory,
+    category_id,
     courseRating,
     courseDeadline,
     namaMentor,
+    mentor_id,
+    mitra_id,
     slugMitra,
     sesi1,
     link1,
@@ -136,7 +185,6 @@ class coursesService {
       }
       const { url } = await Cloudinary.upload(thumbnailCourse);
       const createdCourse = await courseRepository.create({
-        course_id,
         isCoursePaid,
         courseTitle,
         courseDescription,
@@ -147,7 +195,9 @@ class coursesService {
         courseTimeStart,
         courseTimeEnd,
         coursePhoto: url,
-        courseCategory,
+        category_id,
+        mentor_id,
+        mitra_id,
         courseRating,
         courseDeadline,
         namaMentor,

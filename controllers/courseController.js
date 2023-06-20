@@ -46,9 +46,32 @@ const getCourseByMitra = async (req, res, next) => {
   });
 };
 
+const getAllCourseByCategory = async (req, res, next) => {
+  const {category_id} = req.params;
+
+  const {status, status_code, message, data} = await coursesService.getAllCourseByCategory({category_id})
+
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  })
+}
+
+const coursePurchased = async (req, res, next) => {
+  const {id} = req.params;
+
+  const {status, status_code, message, data} = await coursesService.coursePurchase({id});
+
+  res.status(status_code).send({
+    status: status_code,
+    message: message,
+    data: data,
+  })
+}
+
 const createCourse = async (req, res, next) => {
   const {
-    course_id,
     isCoursePaid,
     courseTitle,
     courseDescription,
@@ -59,10 +82,12 @@ const createCourse = async (req, res, next) => {
     courseTimeStart,
     courseTimeEnd,
     coursePhoto,
-    courseCategory,
+    category_id,
     courseRating,
     courseDeadline,
     namaMentor,
+    mentor_id,
+    mitra_id,
     slugMitra,
     sesi1,
     link1,
@@ -81,7 +106,6 @@ const createCourse = async (req, res, next) => {
   } = req.body;
 
   const { status, status_code, message, data } = await coursesService.create({
-    course_id,
     isCoursePaid,
     courseTitle,
     courseDescription,
@@ -92,10 +116,12 @@ const createCourse = async (req, res, next) => {
     courseTimeStart,
     courseTimeEnd,
     coursePhoto: req.file,
-    courseCategory,
+    category_id,
     courseRating,
     courseDeadline,
     namaMentor,
+    mentor_id,
+    mitra_id,
     slugMitra,
     sesi1,
     link1,
@@ -171,4 +197,6 @@ module.exports = {
   getAllCourse,
   deleteCourseById,
   updateCourse,
+  getAllCourseByCategory,
+  coursePurchased
 };

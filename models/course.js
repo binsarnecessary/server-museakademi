@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      course.belongsTo(models.Mitra, {foreignKey: 'mitraId', as: 'mitra' })
+      course.belongsTo(models.Mitra, {foreignKey: 'mitra_id', as: 'mitra' })
+      course.belongsTo(models.Category, {foreignKey: 'category_id', as: 'category'})
+      course.belongsTo(models.mentor, {foreignKey: 'mentor_id', as: 'mentor'})
+      course.hasMany(models.order, {as: "order"})
       
     }
   }
@@ -26,11 +29,12 @@ module.exports = (sequelize, DataTypes) => {
     courseTimeStart: DataTypes.STRING,
     courseTimeEnd: DataTypes.STRING,
     coursePhoto: DataTypes.STRING,
-    courseCategory: DataTypes.STRING,
+    category_id: DataTypes.INTEGER,
     courseRating: DataTypes.STRING,
     courseDeadline: DataTypes.STRING,
     namaMentor: DataTypes.STRING,
-    mitraId: DataTypes.INTEGER,
+    mentor_id: DataTypes.INTEGER,
+    mitra_id: DataTypes.INTEGER,
     slugMitra: DataTypes.STRING,
     sesi1: DataTypes.STRING,
     link1: DataTypes.STRING,

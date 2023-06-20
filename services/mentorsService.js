@@ -53,8 +53,7 @@ class MentorServices {
   }
 
   static async create({
-    mentor_id,
-    name,
+    user_id,
     skill,
     nomorKTP,
     scanKTP,
@@ -64,86 +63,8 @@ class MentorServices {
     aboutMe,
   }) {
     try {
-      if (!name) {
-        return {
-          status: false,
-          status_code: 400,
-          message: "Name wajib diisi",
-          data: {
-            registered_mentor: null,
-          },
-        };
-      }
-
-      if (!skill) {
-        return {
-          status: false,
-          status_code: 400,
-          message: "Skill wajib diisi",
-          data: {
-            registered_mentor: null,
-          },
-        };
-      }
-
-      if (!nomorKTP) {
-        return {
-          status: false,
-          status_code: 400,
-          message: "nomorKTP wajib diisi",
-          data: {
-            registered_mentor: null,
-          },
-        };
-      }
-
-      if (!scanKTP) {
-        return {
-          status: false,
-          status_code: 400,
-          message: "scanKTP wajib diisi",
-          data: {
-            registered_mentor: null,
-          },
-        };
-      }
-
-      if (!fileCV) {
-        return {
-          status: false,
-          status_code: 400,
-          message: "fileCV wajib diisi",
-          data: {
-            registered_mentor: null,
-          },
-        };
-      }
-
-      if (!linkVideo) {
-        return {
-          status: false,
-          status_code: 400,
-          message: "linkVideo wajib diisi",
-          data: {
-            registered_mentor: null,
-          },
-        };
-      }
-
-      if (!filePhoto) {
-        return {
-          status: false,
-          status_code: 400,
-          message: "filePhoto wajib diisi",
-          data: {
-            registered_mentor: null,
-          },
-        };
-      }
-
       const createdMentor = await mentorRepository.create({
-        mentor_id,
-        name,
+        user_id,
         skill,
         nomorKTP,
         scanKTP,
@@ -167,7 +88,7 @@ class MentorServices {
         status_code: 500,
         message: err.message,
         data: {
-          registered_mentor: null,
+          created_mentor: null,
         },
       };
     }
@@ -175,8 +96,7 @@ class MentorServices {
 
   static async updateByID({
     id,
-    mentor_id,
-    name,
+    user_id,
     skill,
     nomorKTP,
     scanKTP,
@@ -191,7 +111,7 @@ class MentorServices {
       if (getMentor.mentor_id == mentor_id) {
         const updatedMentor = await mentorRepository.updateByID({
           id,
-          name,
+          user_id,
           skill,
           nomorKTP,
           scanKTP,
