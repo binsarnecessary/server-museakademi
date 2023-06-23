@@ -1,4 +1,4 @@
-const NilaiService = require("../services/nilaiService");
+const NilaiService = require("../services/NilaiService");
 
 const getAllNilai = async (req, res, next) => {
   const {status, status_code, message, data} = await NilaiService.getAllNilai({})
