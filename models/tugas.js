@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Tugas.hasOne(models.Mentor, {foreignKey: 'mentor_id', as: 'mentor'})
+      // Tugas.hasOne(models.Mentor, {foreignKey: 'mentor_id', as: 'mentor'})
     }
   }
   Tugas.init({

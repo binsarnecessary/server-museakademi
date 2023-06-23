@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Nilai.hasOne(models.Tugas, {foreignKey: 'tugas_id', as: 'tugas'})
-      Nilai.hasMany(models.User, {foreignKey: 'user_id', as: 'user'})
+      // Nilai.hasOne(models.Tugas, {foreignKey: 'tugas_id', as: 'tugas'})
+      // Nilai.hasMany(models.User, {foreignKey: 'user_id', as: 'user'})
     }
   }
   Nilai.init({
