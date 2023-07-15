@@ -10,7 +10,7 @@ static async getAllCategory() {
 }
 
   static async getCategoryById({ id }) {
-    const getCategoryById = await Category.findAll({ where: { id } });
+    const getCategoryById = await Category.findOne({ where: { id } });
     
     return getCategoryById;
   }

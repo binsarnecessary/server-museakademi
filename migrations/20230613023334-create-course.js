@@ -56,10 +56,10 @@ module.exports = {
       namaMentor: {
         type: Sequelize.STRING,
       },
-      mentor_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'mentors',
+          model: 'Users',
           key: 'id',
         },
       },
@@ -71,54 +71,6 @@ module.exports = {
         }
       },
       slugMitra: {
-        type: Sequelize.STRING,
-      },
-      sesi1: {
-        type: Sequelize.STRING,
-      },
-      link1: {
-        type: Sequelize.STRING,
-      },
-      sesi2: {
-        type: Sequelize.STRING,
-      },
-      link2: {
-        type: Sequelize.STRING,
-      },
-      sesi3: {
-        type: Sequelize.STRING,
-      },
-      link3: {
-        type: Sequelize.STRING,
-      },
-      sesi4: {
-        type: Sequelize.STRING,
-      },
-      link4: {
-        type: Sequelize.STRING,
-      },
-      sesi5: {
-        type: Sequelize.STRING,
-      },
-      link5: {
-        type: Sequelize.STRING,
-      },
-      sesi6: {
-        type: Sequelize.STRING,
-      },
-      link6: {
-        type: Sequelize.STRING,
-      },
-      sesi7: {
-        type: Sequelize.STRING,
-      },
-      link7: {
-        type: Sequelize.STRING,
-      },
-      sesi8: {
-        type: Sequelize.STRING,
-      },
-      link8: {
         type: Sequelize.STRING,
       },
       deletedAt: {

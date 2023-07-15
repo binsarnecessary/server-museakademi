@@ -1,4 +1,5 @@
 const categoryService = require("../services/categoryServices");
+const { Category } = require("../models");
 
 const getAllCategory = async (req, res, next) => {
   const { status, status_code, message, data } = await categoryService.getAllCategory(
@@ -27,18 +28,6 @@ const getCategoryById = async (req, res, next) => {
   });
 };
 
-const getAllCategoryWithCourse = async (req, res, next) => {
-  const {status, status_code, message, data} = await categoryService.getAllCategoryWithCourse(
-    {}
-  );
-
-  res.status(status_code).send({
-    status: status_code,
-    message: message,
-    data: data,
-  });
-};
-
 const createCategory = async (req, res, next) => {
   const {
     categoryName,
@@ -55,9 +44,42 @@ const createCategory = async (req, res, next) => {
   });
 };
 
+const deleteCategoryById = async (req, res, next) => {
+  const { id } = req.params;
+
+  const { status, status_code, message, data } =
+    await categoryService.deletedCategoryById({
+      id,
+    });
+
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  });
+};
+
+const updateCategory = async(req, res) => {
+  try {
+    await Category.update(req.body, {
+      where: {id: req.params.id},
+    })
+    res.status(200).send({
+      status: true,
+      message: 'Updated Success',
+      data: {
+        category: Category,
+      }
+    })
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
 module.exports = {
   getAllCategory,
   getCategoryById,
   createCategory,
-  getAllCategoryWithCourse,
+  deleteCategoryById,
+  updateCategory,
 };

@@ -2,20 +2,29 @@ const usersService = require("../services/usersService");
 const { User } = require("../models");
 const user = require("../models/user");
 
-const getPostsByID = async (req, res, next) => {
-  const { id } = req.params;
+const getUserById = async(req, res, next) => {
+  const {id} = req.params;
 
-  const { status, status_code, message, data } =
-    await usersService.getPostsByID({
-      id,
-    });
+  const { status, status_code, message, data } = await usersService.getUserById({id});
 
   res.status(status_code).send({
     status: status,
     message: message,
     data: data,
-  });
-};
+  })
+}
+
+const getAllUserByRole = async (req, res, next) => {
+  const {role} = req.params;
+
+  const {status, status_code, message, data} = await usersService.getAllUserByRole({role});
+
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  })
+}
 
 const deleteByID = async (req, res, next) => {
   const { id } = req.params;
@@ -66,4 +75,4 @@ const updateUser = async (req, res) => {
 
 };
 
-module.exports = { getPostsByID, deleteByID, getAllUsers, updateUser };
+module.exports = { getAllUserByRole, getUserById ,deleteByID, getAllUsers, updateUser };

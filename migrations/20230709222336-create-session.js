@@ -2,19 +2,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-  await queryInterface.createTable('Tugas', {
+    await queryInterface.createTable('sessions', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      },
-      user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
       },
       course_id: {
         type: Sequelize.INTEGER,
@@ -23,20 +16,20 @@ module.exports = {
           key: 'id'
         }
       },
-      judulTugas: {
-        type: Sequelize.STRING,
-      },
-      petunjukPengerjaan: {
+      linkvideo: {
         type: Sequelize.STRING
       },
-      linkTugas: {
+      linkzoom: {
         type: Sequelize.STRING
       },
-      tugasStart: {
-        type: Sequelize.DATE
+      linkpdf: {
+        type: Sequelize.STRING
       },
-      tugasEnd: {
-        type: Sequelize.DATE
+      linkppt: {
+        type: Sequelize.STRING
+      },
+      link: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -49,6 +42,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Tugas');
+    await queryInterface.dropTable('sessions');
   }
 };

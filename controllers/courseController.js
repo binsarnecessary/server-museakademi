@@ -64,7 +64,7 @@ const coursePurchased = async (req, res, next) => {
   const {status, status_code, message, data} = await coursesService.coursePurchase({id});
 
   res.status(status_code).send({
-    status: status_code,
+    status: status,
     message: message,
     data: data,
   })
@@ -86,23 +86,9 @@ const createCourse = async (req, res, next) => {
     courseRating,
     courseDeadline,
     namaMentor,
-    mentor_id,
+    user_id,
     mitra_id,
     slugMitra,
-    sesi1,
-    link1,
-    sesi2,
-    link2,
-    sesi3,
-    link3,
-    sesi4,
-    link4,
-    sesi5,
-    link5,
-    sesi6,
-    link6,
-    sesi7,
-    link8,
   } = req.body;
 
   const { status, status_code, message, data } = await coursesService.create({
@@ -120,23 +106,9 @@ const createCourse = async (req, res, next) => {
     courseRating,
     courseDeadline,
     namaMentor,
-    mentor_id,
+    user_id,
     mitra_id,
     slugMitra,
-    sesi1,
-    link1,
-    sesi2,
-    link2,
-    sesi3,
-    link3,
-    sesi4,
-    link4,
-    sesi5,
-    link5,
-    sesi6,
-    link6,
-    sesi7,
-    link8,
   });
 
   res.status(status_code).send({

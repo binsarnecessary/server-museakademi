@@ -22,6 +22,7 @@ const transactionController = require("./controllers/transactionController");
 const categoryController = require("./controllers/categoryController");
 const tugasController = require("./controllers/tugasController");
 const nilaiController = require("./controllers/nilaiController");
+const sessionController = require("./controllers/sessionController");
 
 
 // Import Midleware
@@ -37,7 +38,8 @@ app.get("/auth/me", middleware.authenticate, authController.currentUser);
 //User
 // app.get("/api/users", middleware.authenticate, middleware.isAdmin, usersController.getAllUsers);
 app.get("/api/users", usersController.getAllUsers);
-app.get("/api/users", usersController.getAllUsers);
+app.get("/api/users/:id", usersController.getUserById);
+app.get("/api/users/role/:role", usersController.getAllUserByRole);
 app.patch("/api/users/:id",upload.none(), usersController.updateUser)
 app.delete("/api/users/:id", usersController.deleteByID)
 
@@ -62,8 +64,11 @@ app.patch("/api/course/:id",upload.none(), courseController.updateCourse);
 
 //Mitra
 app.get("/api/mitra", mitraController.getAllMitra);
-app.post("/api/mitra",upload.single("logoMitra"), mitraController.createMitra);
 app.get("/api/mitra/:slug", mitraController.getMitraBySlug)
+// app.get("/api/mitra/detail/:id", mitraController.getMitraById)
+app.post("/api/mitra",upload.single("logoMitra"), mitraController.createMitra);
+app.delete("/api/mitra/:id", mitraController.deletedMitraById)
+app.patch("/api/mitra/:id",upload.none(), mitraController.updateMitra);
 
 //Livestreaming
 app.get("/api/livestreaming/:id", livestreamingController.getLiveByID)
@@ -84,17 +89,28 @@ app.get("/api/order", transactionController.getAllOrder);
 app.post("/api/category", upload.none(), categoryController.createCategory);
 app.get("/api/category/:id", categoryController.getCategoryById);
 app.get("/api/category", categoryController.getAllCategory);
-app.get("/api/category/course", categoryController.getAllCategoryWithCourse);
+app.delete("/api/category/:id", categoryController.deleteCategoryById);
+app.patch("/api/category/:id", upload.none(), categoryController.updateCategory)
 
 //Tugas
 app.post("/api/tugas", upload.none(), tugasController.createTugas);
 app.get("/api/tugas", tugasController.getAllTugas)
 app.get("/api/tugas/:id", tugasController.getTugasById)
+app.get("/api/tugas/course/:course_id", tugasController.getAllTugasByCourse);
 app.delete("/api/tugas/:id", tugasController.deleteByID)
+app.patch("/api/tugas/:id", upload.none(), tugasController.updateTugas);
 
 //Nilai
 app.post("/api/nilai", upload.none(), nilaiController.createNilai);
 app.get("/api/nilai", nilaiController.getAllNilai)
+
+//Session
+app.post("/api/session", upload.none(), sessionController.createSessions);
+app.get("/api/session", sessionController.getAllSession);
+app.get("/api/session/:id", sessionController.getSessionById);
+app.get("/api/session/course/:course_id", sessionController.getAllSessionByCourseId);
+app.delete("/api/session/:id", sessionController.deleteSessionById);
+app.patch("/api/session/:id", upload.none(), sessionController.updateSession);
 
 
 // API Documentation

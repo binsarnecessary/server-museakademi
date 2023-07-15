@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      order.belongsTo(models.User, {foreignKey: 'user_id', as: 'user'})
-      order.belongsTo(models.course, {foreignKey: 'course_id', as: 'course'})
-      order.hasOne(models.transactionhistory, {as: 'transactionhistory'})
+      // order.belongsTo(models.User, {foreignKey: 'user_id', as: 'user'})
+      // order.belongsTo(models.course, {foreignKey: 'course_id', as: 'course'})
+      // order.hasOne(models.transactionhistory, {as: 'transactionhistory'})
     }
   }
   order.init({

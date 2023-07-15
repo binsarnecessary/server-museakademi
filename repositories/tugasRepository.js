@@ -13,18 +13,26 @@ class TugasRepository {
     return getAllTugas;
   }
 
+  static async getAllTugasByCourse({course_id}) {
+    const getAllTugasByCourse = await Tugas.findAll({where: {course_id}})
+
+    return getAllTugasByCourse;
+  }
+
   static async create({
-    mentor_id,
+    user_id,
+    course_id,
     judulTugas,
-    petunjukTugas,
+    petunjukPengerjaan,
     linkTugas,
     tugasStart,
     tugasEnd,
   }) {
     const createdTugas = Tugas.create({
-    mentor_id,
+    user_id,
+    course_id,
     judulTugas,
-    petunjukTugas,
+    petunjukPengerjaan,
     linkTugas,
     tugasStart,
     tugasEnd

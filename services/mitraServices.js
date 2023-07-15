@@ -52,6 +52,30 @@ class MitraService {
     }
   }
 
+  static async getMitraById({id}) {
+    try {
+      const getMitraById = await mitraRepository.getMitraById({id});
+
+      return {
+        status: true,
+        status_code: 200,
+        message: 'Success',
+        data: {
+          Mitra: getMitraById
+        }
+      }
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          Mitra: null
+        }
+      };
+    }
+  }
+
   static async create({
     emailMitra,
     nameMitra,
@@ -122,6 +146,45 @@ class MitraService {
       };
     }
   }
+
+  static async deletedMitraById({ id }) {
+    try {
+      const getMitra = await mitraRepository.getMitraById({ id });
+
+      if (!getMitra)
+        return {
+          status: false,
+          status_code: 404,
+          message: "Mitra tidak ditemukan",
+          data: {
+            deleted_mitra: null,
+          },
+        };
+
+      const deletedMitra = await mitraRepository.deleteMitraById({
+        id,
+      });
+
+      return {
+        status: true,
+        status_code: 200,
+        message: "Success",
+        data: {
+          deleted_mitra: deletedMitra,
+        },
+      };
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          deleted_mitra: null,
+        },
+      };
+    }
+  }
+
 }
 
 module.exports = MitraService;

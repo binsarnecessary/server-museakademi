@@ -11,11 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Tugas.hasOne(models.Mentor, {foreignKey: 'mentor_id', as: 'mentor'})
+      Tugas.belongsTo(models.User, {foreignKey: 'user_id', as: 'user'})
+      Tugas.belongsTo(models.course, {foreignKey: 'course_id', as: 'course'})
     }
   }
   Tugas.init({
-    mentor_id: DataTypes.INTEGER,
+    user_id: DataTypes.INTEGER,
+    course_id: DataTypes.INTEGER,
     judulTugas: DataTypes.STRING,
     petunjukPengerjaan: DataTypes.STRING,
     linkTugas: DataTypes.STRING,

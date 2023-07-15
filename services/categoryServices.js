@@ -26,30 +26,6 @@ class CategoryService {
     }
   }
 
-  static async getAllCategoryWithCourse({}) {
-    try {
-      const getAllCategoryWithCourse =
-        await categoryRepository.getAllCategoryWithCourse();
-
-      return {
-        status: true,
-        status_code: 200,
-        message: "Success",
-        data: {
-          Category: getAllCategoryWithCourse,
-        },
-      };
-    } catch (err) {
-      return {
-        status: false,
-        status_code: 500,
-        message: err.message,
-        data: {
-          Category: null,
-        },
-      };
-    }
-  }
 
   static async getCategoryById({ id }) {
     try {
@@ -112,6 +88,45 @@ class CategoryService {
       };
     }
   }
+
+  static async deletedCategoryById({ id }) {
+    try {
+      const getCategory = await categoryRepository.getCategoryById({ id });
+
+      if (!getCategory)
+        return {
+          status: false,
+          status_code: 404,
+          message: "User tidak ditemukan",
+          data: {
+            deleted_category: null,
+          },
+        };
+
+      const deletedCategroy = await categoryRepository.deleteCategoryById({
+        id,
+      });
+
+      return {
+        status: true,
+        status_code: 200,
+        message: "Success",
+        data: {
+          deleted_category: deletedCategroy,
+        },
+      };
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          deleted_category: null,
+        },
+      };
+    }
+  }
+
 }
 
 module.exports = CategoryService;

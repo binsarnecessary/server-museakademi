@@ -13,6 +13,12 @@ class UsersRepository {
     return getUser;
   }
 
+  static async getAllUserByRole({role}) {
+    const getAllUserByRole = await User.findAll({where : {role}});
+
+    return getAllUserByRole;
+  }
+
   static async create({
     name,
     email,

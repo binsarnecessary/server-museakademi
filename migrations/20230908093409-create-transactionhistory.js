@@ -12,13 +12,6 @@ module.exports = {
       order_id: {
         type: Sequelize.STRING
       },
-      payment_id: {
-        type: Sequelize.INTEGER,
-        references: {      
-          model: 'orders',
-          key: 'id'
-        }
-      },
       gross_amount: {
         type: Sequelize.FLOAT
       },

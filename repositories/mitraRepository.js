@@ -9,6 +9,12 @@ class MitraRepository {
     return getAllMitra;
   }
 
+  static async getMitraById({id}) {
+    const getMitraById = await Mitra.findOne({where: {id}})
+
+    return getMitraById;
+  }
+
   static async getMitraBySlug({ slug }) {
     const getSlugMitra = await Mitra.findOne({ where: { slug } });
 

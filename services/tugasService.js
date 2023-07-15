@@ -27,6 +27,30 @@ class TugasService {
     }
   }
 
+  static async getAllTugasByCourse({course_id}){
+    try {
+      const getALLTugasByCourse = await tugasRepository.getAllTugasByCourse({course_id});
+
+      return {
+        status: true,
+        status_code: 200,
+        message: 'Success',
+        data: {
+          tugas: getALLTugasByCourse
+        }
+      };
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          tugas: null,
+        }
+      };
+    }
+  }
+
   static async getAllTugas({}) {
     try {
       const getAllTugas = await tugasRepository.getAllTugas({})
@@ -55,7 +79,7 @@ class TugasService {
     try {
       const getTugas = await tugasRepository.getByID({ id });
 
-      if (!getUser)
+      if (!getTugas)
         return {
           status: false,
           status_code: 404,
@@ -90,9 +114,10 @@ class TugasService {
   }
 
   static async create({
-    mentor_id,
+    user_id,
+    course_id,
     judulTugas,
-    petunjukTugas,
+    petunjukPengerjaan,
     linkTugas,
     tugasStart,
     tugasEnd,
@@ -109,9 +134,10 @@ class TugasService {
         };
       }
       const createdTugas = await tugasRepository.create({
-        mentor_id,
+        user_id,
+        course_id,
         judulTugas,
-        petunjukTugas,
+        petunjukPengerjaan,
         linkTugas,
         tugasStart,
         tugasEnd,
