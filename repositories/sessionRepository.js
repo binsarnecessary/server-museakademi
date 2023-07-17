@@ -3,6 +3,7 @@ const { session } = require("../models");
 class sessionRepository {
   static async createSession({
     course_id,
+    nameSession,
     linkvideo,
     linkzoom,
     linkpdf,
@@ -11,6 +12,7 @@ class sessionRepository {
   }) {
     const createdSession = session.create({
       course_id,
+      nameSession,
       linkvideo,
       linkzoom,
       linkpdf,

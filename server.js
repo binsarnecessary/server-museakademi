@@ -103,6 +103,11 @@ app.patch("/api/tugas/:id", upload.none(), tugasController.updateTugas);
 //Nilai
 app.post("/api/nilai", upload.none(), nilaiController.createNilai);
 app.get("/api/nilai", nilaiController.getAllNilai)
+app.get("/api/nilai/:id", nilaiController.getNilaiById)
+app.get("/api/nilai/user/:user_id", nilaiController.getNilaiByUserId)
+app.get("/api/nilai/tugas/:tugas_id", nilaiController.getNilaiByTugasId)
+app.delete("/api/nilai/:id", nilaiController.deletedNilai)
+app.patch("/api/nilai/:id", upload.none(), nilaiController.updatedNilai);
 
 //Session
 app.post("/api/session", upload.none(), sessionController.createSessions);

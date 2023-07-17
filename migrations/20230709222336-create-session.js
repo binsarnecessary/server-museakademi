@@ -16,6 +16,9 @@ module.exports = {
           key: 'id'
         }
       },
+      nameSession: {
+        type: Sequelize.STRING,
+      },
       linkvideo: {
         type: Sequelize.STRING
       },

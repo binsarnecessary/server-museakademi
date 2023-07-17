@@ -8,6 +8,25 @@ class NilaiRepository {
     return getAllNilai;
   }
 
+  static async getNilaiById({id}) {
+    const getNilaiById = await Nilai.findOne({id})
+
+    return getNilaiById;
+  }
+
+  static async getAllNilaiByUserId({user_id}) {
+    const getAllNilaiByUserId = await Nilai.findAll({user_id})
+
+    return getAllNilaiByUserId;
+  }
+
+  static async getAllNilaiByTugasId({tugas_id}) {
+    const getAllNilaiByTugasId = await Nilai.findAll({tugas_id})
+
+    return getAllNilaiByTugasId;
+  }
+
+
   static async create({
     tugas_id,
     user_id,

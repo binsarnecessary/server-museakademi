@@ -4,6 +4,7 @@ const { session } = require("../models");
 const createSessions = async (req, res, next) => {
   const {
     course_id,
+    nameSession,
     linkvideo,
     linkzoom,
     linkpdf,
@@ -13,6 +14,7 @@ const createSessions = async (req, res, next) => {
 
   const { status, status_code, message, data } = await sessionService.createSession({
     course_id,
+    nameSession,
     linkvideo,
     linkzoom,
     linkpdf,

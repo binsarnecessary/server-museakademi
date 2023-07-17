@@ -4,6 +4,7 @@ class sessionService {
 
   static async createSession({
     course_id,
+    nameSession,
     linkvideo,
     linkzoom,
     linkpdf,
@@ -23,6 +24,7 @@ class sessionService {
       }
       const createdSession = await sessionRepository.createSession({
         course_id,
+        nameSession,
         linkvideo,
         linkzoom,
         linkpdf,

@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   session.init({
     course_id: DataTypes.INTEGER,
+    nameSession: DataTypes.STRING,
     linkvideo: DataTypes.STRING,
     linkzoom: DataTypes.STRING,
     linkpdf: DataTypes.STRING,
