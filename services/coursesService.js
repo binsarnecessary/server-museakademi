@@ -54,6 +54,32 @@ class coursesService {
     }
   }
 
+  static async getCourseByUserId({ user_id }) {
+    try {
+      const getCourseByUserId = await courseRepository.getCourseByUserId({
+        user_id,
+      });
+
+      return {
+        status: true,
+        status_code: 200,
+        message: "Success",
+        data: {
+          course: getCourseByUserId,
+        },
+      };
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          course: null,
+        },
+      };
+    }
+  }
+
   static async getCourseByMitra({ slugMitra }) {
     try {
       const getcourseTitle = await courseRepository.getCourseByMitra({

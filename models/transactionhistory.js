@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // transactionhistory.belongsTo(models.order, {foreignKey: 'payment_id', as: 'payment'})
     }
   }
   transactionhistory.init({

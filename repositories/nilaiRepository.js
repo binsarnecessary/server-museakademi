@@ -15,13 +15,13 @@ class NilaiRepository {
   }
 
   static async getAllNilaiByUserId({user_id}) {
-    const getAllNilaiByUserId = await Nilai.findAll({user_id})
+    const getAllNilaiByUserId = await Nilai.findAll({ where: { user_id } })
 
     return getAllNilaiByUserId;
   }
 
   static async getAllNilaiByTugasId({tugas_id}) {
-    const getAllNilaiByTugasId = await Nilai.findAll({tugas_id})
+    const getAllNilaiByTugasId = await Nilai.findAll({where: {tugas_id}})
 
     return getAllNilaiByTugasId;
   }

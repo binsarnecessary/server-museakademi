@@ -58,6 +58,7 @@ app.get("/api/course/mitra/:slugMitra", courseController.getCourseByMitra)
 app.get("/api/course", courseController.getAllCourse);
 app.get("/api/course/category/:category_id", courseController.getAllCourseByCategory)
 app.get("/api/course/purchased/:id", courseController.coursePurchased);
+app.get("/api/course/mentor/:user_id", courseController.getCourseByUserId);
 app.post("/api/course",upload.single("coursePhoto"), courseController.createCourse)
 app.delete("/api/course/:id", courseController.deleteCourseById)
 app.patch("/api/course/:id",upload.none(), courseController.updateCourse);

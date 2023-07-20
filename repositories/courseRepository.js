@@ -24,6 +24,12 @@ class courseRepository {
     return courses;
   }
 
+  static async getCourseByUserId({ user_id }) {
+    const getCourseByUserId = await course.findAll({ where: { user_id } });
+
+    return getCourseByUserId;
+  }
+
   static async getAllCourse() {
     const getAllCourse = await course.findAll({});
 

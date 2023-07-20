@@ -58,6 +58,18 @@ const getAllCourseByCategory = async (req, res, next) => {
   })
 }
 
+const getCourseByUserId = async (req, res, next) => {
+  const {user_id} = req.params;
+
+  const {status, status_code, message, data} = await coursesService.getCourseByUserId({user_id})
+
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  })
+}
+
 const coursePurchased = async (req, res, next) => {
   const {id} = req.params;
 
@@ -170,5 +182,6 @@ module.exports = {
   deleteCourseById,
   updateCourse,
   getAllCourseByCategory,
-  coursePurchased
+  coursePurchased,
+  getCourseByUserId,
 };
