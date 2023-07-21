@@ -94,6 +94,44 @@ class MentorServices {
     }
   }
 
+  static async deletedMentorById({ id }) {
+    try {
+      const getMentor = await mentorRepository.getMentorByID({ id });
+
+      if (!getMentor)
+        return {
+          status: false,
+          status_code: 404,
+          message: "Tidak Ada Mentor yang ditemukan",
+          data: {
+            deleted_mentor: null,
+          },
+        };
+
+      const deletedMentor = await mentorRepository.deleteByID({
+        id,
+      });
+
+      return {
+        status: true,
+        status_code: 200,
+        message: "Success",
+        data: {
+          deleted_mentor: deletedMentor,
+        },
+      };
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          deleted_mentor: null,
+        },
+      };
+    }
+  }
+
   static async updateByID({
     id,
     user_id,

@@ -39,6 +39,12 @@ class mentorRepository {
     return createdMentor;
   }
 
+  static async deleteByID({ id }) {
+    const deletedMentor = await mentor.destroy({ where: { id } });
+
+    return deletedMentor;
+  }
+
   static async updateByID({
     id,
     user_id,

@@ -47,6 +47,21 @@ const updateMentor = async (req, res) => {
   }
 };
 
+const deletedMentor = async (req, res, next) => {
+  const { id } = req.params;
+
+  const { status, status_code, message, data } =
+    await mentorsService.deletedMentorById({
+      id,
+    });
+
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  });
+};
+
   const create = async (req, res, next) => {
     const { user_id, skill, nomorKTP, scanKTP, fileCV, linkVideo, filePhoto, aboutMe } = req.body;
   
@@ -69,4 +84,4 @@ const updateMentor = async (req, res) => {
   };
 
 
-module.exports = { create, getMentorByID, updateMentor, getAll };
+module.exports = { create, getMentorByID, updateMentor, getAll, deletedMentor };

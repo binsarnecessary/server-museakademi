@@ -23,6 +23,7 @@ const categoryController = require("./controllers/categoryController");
 const tugasController = require("./controllers/tugasController");
 const nilaiController = require("./controllers/nilaiController");
 const sessionController = require("./controllers/sessionController");
+const sertifikatController = require("./controllers/sertifikatController");
 
 
 // Import Midleware
@@ -50,6 +51,7 @@ app.post("/api/mentor", upload.none(), mentorController.create);
 app.patch("/api/mentor/:id",upload.none(), mentorController.updateMentor);
 app.get("/api/mentor/:id", mentorController.getMentorByID);
 app.get("/api/mentor", mentorController.getAll)
+app.delete("/api/mentor/:id", mentorController.deletedMentor)
 
 //Course
 app.get("/api/course/:id", courseController.getCourseByID)
@@ -117,6 +119,13 @@ app.get("/api/session/:id", sessionController.getSessionById);
 app.get("/api/session/course/:course_id", sessionController.getAllSessionByCourseId);
 app.delete("/api/session/:id", sessionController.deleteSessionById);
 app.patch("/api/session/:id", upload.none(), sessionController.updateSession);
+
+//Sertifikat
+app.post("/api/sertifikat", upload.none(), sertifikatController.createSertifikat);
+app.get("/api/sertifikat", sertifikatController.getAllSertifikat)
+app.get("/api/sertifikat/:id", sertifikatController.getSertifikatById)
+app.get("/api/sertifikat/user/:user_id", sertifikatController.getSertifikatByUserId);
+app.get("/api/sertifikat/course/:course_id", sertifikatController.getSertifikatByCourseId);
 
 
 // API Documentation
