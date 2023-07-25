@@ -25,6 +25,7 @@ class NilaiRepository {
   static async getAllNilaiByTugasId({ tugas_id }) {
     const getAllNilaiByTugasId = await Nilai.findAll({
       where: { tugas_id },
+      include: "tugas",
     });
 
     return getAllNilaiByTugasId;
