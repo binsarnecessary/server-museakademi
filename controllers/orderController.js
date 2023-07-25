@@ -129,5 +129,22 @@ res.status(status_code).send({
 });
 }
 
+const updateOrder = async(req, res) => {
+  try {
+    await order.update(req.body, {
+      where: {id: req.params.id},
+    });
+    res.status(200).send({
+      status: true,
+      message: 'Updated Success',
+      data: {
+        order: order
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-module.exports = { generateOrder, createTransaction, getOrderByOrderID, getAllOrder };
+
+module.exports = { generateOrder, createTransaction, getOrderByOrderID, getAllOrder, updateOrder };

@@ -82,11 +82,13 @@ app.patch("/api/livestreaming/:id",upload.none(), livestreamingController.update
 
 //Order
 app.post("/api/order", upload.none(), orderController.generateOrder);
+app.patch("/api/order/:id", upload.none(), orderController.updateOrder)
 
 //TransactionHistory
 app.post("/api/handling", upload.none(), transactionController.createTransaction);
 app.get("/api/order/:id", transactionController.getOrderByOrderID);
 app.get("/api/order", transactionController.getAllOrder);
+app.patch("/api/handling/:id", upload.none(), transactionController.updateTransactionStatus)
 
 //Category
 app.post("/api/category", upload.none(), categoryController.createCategory);

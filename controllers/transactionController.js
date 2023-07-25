@@ -1,6 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const midtransClient = require('midtrans-client');
 const transactionhistoryServices = require('../services/transactionhistoryServices');
+const { transactionhistory } = require("../models")
 
 const snap = new midtransClient.Snap({
     isProduction: false,
@@ -51,4 +52,21 @@ res.status(status_code).send({
 });
 }
 
-module.exports = { createTransaction, getOrderByOrderID, getAllOrder };
+const updateTransactionStatus = async(req, res) => {
+  try {
+    await transactionhistory.update(req.body, {
+      where: {id: req.params.id},
+    });
+    res.status(200).send({
+      status: true,
+      message: 'Updated Success',
+      data: {
+        transaction: transactionhistory
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+module.exports = { createTransaction, getOrderByOrderID, getAllOrder, updateTransactionStatus };
