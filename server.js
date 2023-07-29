@@ -128,6 +128,7 @@ app.get("/api/sertifikat", sertifikatController.getAllSertifikat)
 app.get("/api/sertifikat/:id", sertifikatController.getSertifikatById)
 app.get("/api/sertifikat/user/:user_id", sertifikatController.getSertifikatByUserId);
 app.get("/api/sertifikat/course/:course_id", sertifikatController.getSertifikatByCourseId);
+app.delete("/api/sertifikat/:id", sertifikatController.deletedSertifikat);
 
 
 // API Documentation

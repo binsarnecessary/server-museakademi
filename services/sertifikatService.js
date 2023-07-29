@@ -148,6 +148,41 @@ class SertifikatService {
       };
     }
   }
+
+  static async deleteSertifkat({id}) {
+    try {
+      const getSertifiat = await sertifikatRepository.getSertifikatById({id})
+
+      if(!getSertifiat)
+      return {
+        status: false,
+        status_code: 404,
+        message: 'Session not found',
+        data: {
+          deleted_sertifikat: null
+        }
+      };
+
+      const deletedSertifikat = await sertifikatRepository.deletedSertifikat({id})
+      return {
+        status: true,
+        status_code: 200,
+        message: 'Success',
+        data: {
+          deleted_sertifikat: deletedSertifikat,
+        }
+      };
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {
+          deleted_sertifikat: null,
+        }
+      };
+    }
+  }
 }
 
 module.exports = SertifikatService;

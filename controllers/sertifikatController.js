@@ -69,6 +69,19 @@ const createSertifikat = async (req, res, next) => {
   });
 };
 
+const deletedSertifikat = async(req, res, next) => {
+  const { id } = req.params;
+
+  const { status, status_code, message, data } = await SertifikatService.deleteSertifkat({id});
+
+  res.status(status_code).send({
+    status: status,
+    message: message,
+    data: data,
+  })
+};
+
+
 
 module.exports = {
   getAllSertifikat,
@@ -76,4 +89,5 @@ module.exports = {
   getSertifikatByCourseId,
   getSertifikatById,
   createSertifikat,
+  deletedSertifikat
 };

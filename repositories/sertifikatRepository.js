@@ -8,7 +8,7 @@ class sertifikatRepository {
   }
 
   static async getSertifikatByIdUser({ user_id }) {
-    const getSertifikatByIdUser = await Sertifikat.findOne({
+    const getSertifikatByIdUser = await Sertifikat.findAll({
       where: { user_id },
       include: "user",
     });
@@ -47,6 +47,12 @@ class sertifikatRepository {
     });
 
     return createdSertifikat;
+  }
+
+  static async deletedSertifikat({id}) {
+    const deletedSertifikat = await Sertifikat.destroy({where: {id}});
+
+    return deletedSertifikat;
   }
 }
 
